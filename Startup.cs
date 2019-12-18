@@ -12,7 +12,10 @@ namespace CourseService
     {
         public Startup(IConfiguration configuration)
         {
-            Configuration = configuration;
+            Configuration = new ConfigurationBuilder()
+                .AddJsonFile("appsettings.json")
+                .AddEnvironmentVariables()
+                .Build();
         }
 
         public IConfiguration Configuration { get; }
@@ -20,7 +23,8 @@ namespace CourseService
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddDbContext<CourseServiceContext>(options => options.UseSqlite(Configuration["ConnectionStrings:DefaultConnection"]));
+            services.AddDbContext<CourseServiceContext>(options =>
+                options.UseSqlite(Configuration.GetValue<string>("CONNECTION_STRING")));
             services.AddControllers();
         }
 

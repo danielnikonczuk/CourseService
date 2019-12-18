@@ -3,11 +3,11 @@
 FROM mcr.microsoft.com/dotnet/core/aspnet:3.1-buster-slim AS base
 WORKDIR /app
 EXPOSE 80
-EXPOSE 443
+EXPOSE 8443
 
 FROM mcr.microsoft.com/dotnet/core/sdk:3.1-buster AS build
 WORKDIR /src
-COPY ["src/CourseService.csproj", ""]
+COPY ["CourseService.csproj", ""]
 RUN dotnet restore "./CourseService.csproj"
 COPY . .
 WORKDIR "/src/."

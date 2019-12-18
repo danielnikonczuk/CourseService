@@ -2,5 +2,11 @@ version: '3'
 services:
   courseservice:
     build: .
+    image: courseservice
     ports:
-      - "443:443"
+      - "8443:8443"
+      - "80:80"
+    environment:
+      - CONNECTION_STRING=Data Source=courses.db
+    networks:
+      - default
