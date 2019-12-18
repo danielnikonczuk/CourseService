@@ -1,12 +1,25 @@
-version: '3'
-services:
-  courseservice:
-    build: .
+--- 
+services: 
+  courseservice: 
+    build: "."
+    depends_on: 
+      - db
+    environment: 
+      - ASPNETCORE_ENVIRONMENT=Development
+      - CONNECTION_STRING=Server=sqlserver;Database=master;User Id=sa;Password=MyStrongPassw0rd!
     image: courseservice
-    ports:
+    ports: 
       - "8443:8443"
       - "80:80"
-    environment:
-      - CONNECTION_STRING=Data Source=courses.db
-    networks:
-      - default
+  db: 
+    environment: 
+      ACCEPT_EULA: Y
+      SA_PASSWORD: MyStrongPassw0rd!
+      MSSQL_MEMORY_LIMIT_MB: 3072
+    expose: 
+      - 1433
+    hostname: 'sqlserver'
+    image: "mcr.microsoft.com/mssql/server:2019-latest"
+    ports: 
+      - "11433:1433"
+version: "3"
