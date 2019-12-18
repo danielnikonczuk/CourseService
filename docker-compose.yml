@@ -1,15 +1,15 @@
 --- 
 services: 
-  courseservice: 
-    build: "."
+  web: 
+    build:  .
     depends_on: 
       - db
     environment: 
       - ASPNETCORE_ENVIRONMENT=Development
-      - CONNECTION_STRING=Server=sqlserver;Database=master;User Id=sa;Password=MyStrongPassw0rd!
+      - CONNECTION_STRING=Server=192.168.99.101,1433;Database=master;User Id=sa;Password=MyStrongPassw0rd!;Encrypt=False;TrustServerCertificate=True;
     image: courseservice
     ports: 
-      - "8443:8443"
+      - "443:443"
       - "80:80"
   db: 
     environment: 
@@ -19,7 +19,9 @@ services:
     expose: 
       - 1433
     hostname: 'sqlserver'
-    image: "mcr.microsoft.com/mssql/server:2019-latest"
+    image: microsoft/mssql-server-linux:2017-latest
     ports: 
-      - "11433:1433"
+      - "1433:1433"
+    volumes:  
+      - ./data/mssql:/var/opt/mssql3
 version: "3"
