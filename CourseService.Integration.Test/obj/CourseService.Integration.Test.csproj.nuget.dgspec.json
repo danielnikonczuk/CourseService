@@ -41,6 +41,10 @@
       "frameworks": {
         "netcoreapp3.1": {
           "dependencies": {
+            "xunit.assert": {
+              "target": "Package",
+              "version": "[2.4.1, )"
+            },
             "xunit.extensibility.core": {
               "target": "Package",
               "version": "[2.4.1, )"

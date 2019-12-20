@@ -1199,6 +1199,18 @@
           "lib/netstandard2.0/xunit.abstractions.dll": {}
         }
       },
+      "xunit.assert/2.4.1": {
+        "type": "package",
+        "dependencies": {
+          "NETStandard.Library": "1.6.1"
+        },
+        "compile": {
+          "lib/netstandard1.1/xunit.assert.dll": {}
+        },
+        "runtime": {
+          "lib/netstandard1.1/xunit.assert.dll": {}
+        }
+      },
       "xunit.extensibility.core/2.4.1": {
         "type": "package",
         "dependencies": {
@@ -4475,6 +4487,19 @@
         "xunit.abstractions.nuspec"
       ]
     },
+    "xunit.assert/2.4.1": {
+      "sha512": "O/Oe0BS5RmSsM+LQOb041TzuPo5MdH2Rov+qXGS37X+KFG1Hxz7kopYklM5+1Y+tRGeXrOx5+Xne1RuqLFQoyQ==",
+      "type": "package",
+      "path": "xunit.assert/2.4.1",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "lib/netstandard1.1/xunit.assert.dll",
+        "lib/netstandard1.1/xunit.assert.xml",
+        "xunit.assert.2.4.1.nupkg.sha512",
+        "xunit.assert.nuspec"
+      ]
+    },
     "xunit.extensibility.core/2.4.1": {
       "sha512": "yKZKm/8QNZnBnGZFD9SewkllHBiK0DThybQD/G4PiAmQjKtEZyHi6ET70QPU9KtSMJGRYS6Syk7EyR2EVDU4Kg==",
       "type": "package",
@@ -4496,6 +4521,7 @@
   },
   "projectFileDependencyGroups": {
     ".NETCoreApp,Version=v3.1": [
+      "xunit.assert >= 2.4.1",
       "xunit.extensibility.core >= 2.4.1"
     ]
   },
@@ -4540,6 +4566,10 @@
     "frameworks": {
       "netcoreapp3.1": {
         "dependencies": {
+          "xunit.assert": {
+            "target": "Package",
+            "version": "[2.4.1, )"
+          },
           "xunit.extensibility.core": {
             "target": "Package",
             "version": "[2.4.1, )"
