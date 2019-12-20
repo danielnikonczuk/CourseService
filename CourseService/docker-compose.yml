@@ -1,0 +1,33 @@
+--- 
+networks:
+  default-network:
+    driver: bridge
+services: 
+  web: 
+    build:  .
+    depends_on: 
+      - db
+    environment: 
+      - CONNECTION_STRING=Server=sqlserver;Database=Courses;User Id=sa;Password=MyStrongPassw0rd!;
+    image: courseservice
+    ports: 
+      - "443:443"
+      - "8080:80"
+    networks:
+      - default-network
+  db: 
+    environment: 
+      ACCEPT_EULA: Y
+      SA_PASSWORD: MyStrongPassw0rd!
+      MSSQL_MEMORY_LIMIT_MB: 3072
+    expose: 
+      - 1433
+    hostname: sqlserver
+    image: microsoft/mssql-server-linux:2017-latest
+    ports: 
+      - "1433:1433"
+    volumes:  
+      - ./data/mssql:/var/opt/mssql3
+    networks:
+      - default-network
+version: "3"

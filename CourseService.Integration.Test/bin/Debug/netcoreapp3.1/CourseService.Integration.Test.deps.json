@@ -1,0 +1,23 @@
+{
+  "runtimeTarget": {
+    "name": ".NETCoreApp,Version=v3.1",
+    "signature": ""
+  },
+  "compilationOptions": {},
+  "targets": {
+    ".NETCoreApp,Version=v3.1": {
+      "CourseService.Integration.Test/1.0.0": {
+        "runtime": {
+          "CourseService.Integration.Test.dll": {}
+        }
+      }
+    }
+  },
+  "libraries": {
+    "CourseService.Integration.Test/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    }
+  }
+}
