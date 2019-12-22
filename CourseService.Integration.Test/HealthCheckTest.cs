@@ -9,6 +9,7 @@ namespace CourseService.Integration.Test
     public class HealthCheckTest
     {
         private HttpClient _httpClient;
+        private const string ServiceUrl = "http://localhost:8080";
 
         public HealthCheckTest()
         {
@@ -18,11 +19,10 @@ namespace CourseService.Integration.Test
         [Fact]
         public async Task HealthCheckTest_ReturnsHealthyStatus()
         {
-            using var response = await _httpClient.GetAsync("/health");
+            using var response = await _httpClient.GetAsync($"{ServiceUrl}/health");
 
             Assert.Equal(HttpStatusCode.OK, response.StatusCode);
-            Assert.Equal(await response.Content.ReadAsStringAsync(), "Healthy");
-
+            Assert.Equal("Healthy", await response.Content.ReadAsStringAsync());
         }
     }
 }

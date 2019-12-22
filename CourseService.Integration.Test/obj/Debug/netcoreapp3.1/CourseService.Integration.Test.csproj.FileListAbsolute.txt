@@ -1,5 +1,0 @@
-C:\Users\Narcos\Documents\GitHub\northpass\CourseService.Integration.Test\bin\Debug\netcoreapp3.1\CourseService.Integration.Test.deps.json
-C:\Users\Narcos\Documents\GitHub\northpass\CourseService.Integration.Test\bin\Debug\netcoreapp3.1\CourseService.Integration.Test.dll
-C:\Users\Narcos\Documents\GitHub\northpass\CourseService.Integration.Test\obj\Debug\netcoreapp3.1\CourseService.Integration.Test.csprojAssemblyReference.cache
-C:\Users\Narcos\Documents\GitHub\northpass\CourseService.Integration.Test\obj\Debug\netcoreapp3.1\CourseService.Integration.Test.AssemblyInfoInputs.cache
-C:\Users\Narcos\Documents\GitHub\northpass\CourseService.Integration.Test\obj\Debug\netcoreapp3.1\CourseService.Integration.Test.AssemblyInfo.cs

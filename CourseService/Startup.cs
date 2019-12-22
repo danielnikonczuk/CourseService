@@ -8,6 +8,8 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Diagnostics.HealthChecks;
 using Microsoft.Extensions.Hosting;
+using System;
+using System.Text.Json;
 
 namespace CourseService
 {
@@ -26,7 +28,7 @@ namespace CourseService
             ConfigureCommonServices(services);
 
             services
-                .AddDbContext<CourseServiceDbContext>(options => 
+                .AddDbContext<CourseServiceDbContext>(options =>
                 options.UseSqlServer(Configuration.GetConnectionString("ConnectionMssql")));
         }
 
@@ -35,7 +37,7 @@ namespace CourseService
             ConfigureCommonServices(services);
 
             services
-                .AddDbContext<CourseServiceDbContext>(options => 
+                .AddDbContext<CourseServiceDbContext>(options =>
                 options.UseSqlite(Configuration.GetConnectionString("ConnectionSqlite")));
 
         }
@@ -78,7 +80,11 @@ namespace CourseService
 
             services
                 .AddControllers()
-                .AddJsonOptions(options => options.JsonSerializerOptions.WriteIndented = true);
+                .AddJsonOptions(options =>
+                {
+                    options.JsonSerializerOptions.PropertyNamingPolicy = JsonNamingPolicy.CamelCase;
+                    options.JsonSerializerOptions.PropertyNameCaseInsensitive = true;
+                });
         }
     }
 }

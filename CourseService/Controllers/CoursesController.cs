@@ -22,12 +22,6 @@ namespace CourseService.Controllers
         [Route("enroll/{userId}/{courseId}")]
         public async Task<ActionResult<IEnumerable<Course>>> Enroll(int userId, int courseId)
         {
-
-            if (await _context.Enrollments.FindAsync(userId, courseId) != null)
-            {
-                return BadRequest(new { message = "User already enrolled to that course." });
-            }
-
             if (await _context.Courses.FindAsync(courseId) == null)
             {
                 return BadRequest(new { message = $"Course with Id: {courseId} does not exist!" });
@@ -38,11 +32,16 @@ namespace CourseService.Controllers
                 return BadRequest(new { message = $"User with Id: {userId} does not exist!" });
             }
 
+            if (await _context.Enrollments.FindAsync(userId, courseId) != null)
+            {
+                return BadRequest(new { message = "User already enrolled to that course!" });
+            }
+
             await _context.Enrollments.AddAsync(new Enrollment { UserId = userId, CourseId = courseId });
 
             await _context.SaveChangesAsync();
 
-            return RedirectToAction("GetCourses", "Users", new { userId });
+            return Ok(new { message = $"User: {userId} successfully enrolled to course: {courseId}!" });
         }
 
         [HttpDelete]
@@ -51,11 +50,6 @@ namespace CourseService.Controllers
         {
             var enrollment = await _context.Enrollments.FindAsync(userId, courseId);
 
-            if (enrollment == null)
-            {
-                return BadRequest(new { message = "User was not enrolled to that course!" });
-            }
-
             if (await _context.Courses.FindAsync(courseId) == null)
             {
                 return BadRequest(new { message = $"Course with Id: {courseId} does not exist!" });
@@ -64,6 +58,11 @@ namespace CourseService.Controllers
             if (await _context.Users.FindAsync(userId) == null)
             {
                 return BadRequest(new { message = $"User with Id: {userId} does not exist!" });
+            }
+
+            if (enrollment == null)
+            {
+                return BadRequest(new { message = "User was not enrolled to that course!" });
             }
 
             _context.Remove(enrollment);

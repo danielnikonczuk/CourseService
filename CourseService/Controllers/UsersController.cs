@@ -19,7 +19,7 @@ namespace CourseService.Controllers
         }
 
         [HttpGet]
-        [Route("courses/{userId}")]
+        [Route("{userId}/courses")]
         public async Task<ActionResult<IEnumerable<Course>>> GetCourses(int userId)
         {
             var user = await _context.Users.FindAsync(userId);
