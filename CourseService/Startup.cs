@@ -8,7 +8,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Diagnostics.HealthChecks;
 using Microsoft.Extensions.Hosting;
-using System;
+using Microsoft.OpenApi.Models;
 using System.Text.Json;
 
 namespace CourseService
@@ -42,6 +42,24 @@ namespace CourseService
 
         }
 
+        private void ConfigureCommonServices(IServiceCollection services)
+        {
+            services
+                .AddHealthChecks()
+                .AddDbContextCheck<CourseServiceDbContext>();
+
+            services
+                .AddControllers()
+                .AddJsonOptions(options =>
+                {
+                    options.JsonSerializerOptions.PropertyNamingPolicy = JsonNamingPolicy.CamelCase;
+                    options.JsonSerializerOptions.PropertyNameCaseInsensitive = true;
+                });
+
+            services.AddSwaggerGen(c =>
+                c.SwaggerDoc("v1", new OpenApiInfo { Title = "Course Service", Version = "v1" }));
+        }
+
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env, CourseServiceDbContext context)
         {
             context.Database.Migrate();
@@ -50,7 +68,6 @@ namespace CourseService
             {
                 app.UseDeveloperExceptionPage();
             }
-
             app.UseHttpsRedirection();
 
             app.UseRouting();
@@ -70,21 +87,11 @@ namespace CourseService
                     }
                 });
             });
-        }
 
-        private void ConfigureCommonServices(IServiceCollection services)
-        {
-            services
-                .AddHealthChecks()
-                .AddDbContextCheck<CourseServiceDbContext>();
+            app.UseSwagger();
 
-            services
-                .AddControllers()
-                .AddJsonOptions(options =>
-                {
-                    options.JsonSerializerOptions.PropertyNamingPolicy = JsonNamingPolicy.CamelCase;
-                    options.JsonSerializerOptions.PropertyNameCaseInsensitive = true;
-                });
+            app.UseSwaggerUI(c =>
+                c.SwaggerEndpoint("/swagger/v1/swagger.json", "Course Service V1"));
         }
     }
 }
