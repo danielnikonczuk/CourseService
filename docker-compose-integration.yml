@@ -1,20 +1,29 @@
 --- 
-networks:
-  default-network:
-    driver: bridge
 services: 
+  integration: 
+    build: 
+      context: .
+      dockerfile: Dockerfile.integration
+    environment: 
+      - API_URL=http://web:80
+      - CONNECTION_STRING=Server=db;Database=CourseService;User Id=sa;Password=MyStrongPassw0rd!;   
+    entrypoint: bash /app/wait_for_it.sh web:80 -t 20 -- dotnet test
+    depends_on: 
+      - web
+      - db
   web: 
-    build:  .
+    build: 
+      context: CourseService
     depends_on: 
       - db
     environment: 
       - ConnectionStrings:ConnectionMssql=Server=db;Database=CourseService;User Id=sa;Password=MyStrongPassw0rd!;
+    entrypoint: bash /app/wait_for_it.sh db:1433 -t 10 -- dotnet /app/CourseService.dll
+    hostname: web
     image: courseservice
     ports: 
       - "443:443"
       - "8080:80"
-    networks:
-      - default-network
   db: 
     environment: 
       ACCEPT_EULA: Y
@@ -22,12 +31,10 @@ services:
       MSSQL_MEMORY_LIMIT_MB: 3072
     expose: 
       - 1433
-    hostname: sqlserver
+    hostname: db
     image: microsoft/mssql-server-linux:2017-latest
     ports: 
       - "1433:1433"
     volumes:  
       - ./data/mssql:/var/opt/mssql3
-    networks:
-      - default-network
 version: "3"

@@ -5,10 +5,11 @@ namespace CourseService.Integration.Test.Helpers
 {
     public class DatabaseFixture : IDisposable
     {
-        private const string DbConnectionString = "Server=localhost;Database=CourseService;User Id=sa;Password=MyStrongPassw0rd!";
+        private readonly string DbConnectionString;
 
         public DatabaseFixture()
         {
+            DbConnectionString = Environment.GetEnvironmentVariable("CONNECTION_STRING") ?? "Server=localhost;Database=CourseService;User Id=sa;Password=MyStrongPassw0rd!";
             ClearAllTables();
         }
 

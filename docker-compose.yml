@@ -1,0 +1,28 @@
+--- 
+services: 
+  web: 
+    build: 
+      context: CourseService
+    depends_on: 
+      - db
+    environment: 
+      - ConnectionStrings:ConnectionMssql=Server=db;Database=CourseService;User Id=sa;Password=MyStrongPassw0rd!;
+    entrypoint: bash /app/wait_for_it.sh db:1433 -t 0 -- dotnet /app/CourseService.dll
+    image: courseservice
+    ports: 
+      - "443:443"
+      - "8080:80"
+  db: 
+    environment: 
+      ACCEPT_EULA: Y
+      SA_PASSWORD: MyStrongPassw0rd!
+      MSSQL_MEMORY_LIMIT_MB: 3072
+    expose: 
+      - 1433
+    hostname: sqlserver
+    image: microsoft/mssql-server-linux:2017-latest
+    ports: 
+      - "1433:1433"
+    volumes:  
+      - ./data/mssql:/var/opt/mssql3
+version: "3"

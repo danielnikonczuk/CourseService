@@ -3,9 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.29613.14
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CourseService", "CourseService.csproj", "{05FB0571-92E6-4CD0-9DE2-7062150984D1}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CourseService", "CourseService\CourseService.csproj", "{05FB0571-92E6-4CD0-9DE2-7062150984D1}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CourseService.Integration.Test", "..\CourseService.Integration.Test\CourseService.Integration.Test.csproj", "{93B72B59-FAEE-4128-ADD8-BF8C5D95566C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CourseService.Integration.Tests", "CourseService.Integration.Tests\CourseService.Integration.Tests.csproj", "{93B72B59-FAEE-4128-ADD8-BF8C5D95566C}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

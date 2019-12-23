@@ -19,4 +19,5 @@ RUN dotnet publish "CourseService.csproj" -c Release -o /app/publish
 FROM base AS final
 WORKDIR /app
 COPY --from=publish /app/publish .
+RUN curl https://raw.githubusercontent.com/vishnubob/wait-for-it/master/wait-for-it.sh > wait_for_it.sh
 ENTRYPOINT ["dotnet", "CourseService.dll"]
