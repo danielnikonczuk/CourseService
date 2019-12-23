@@ -1,6 +1,6 @@
 # Course Service
 
-## INSTRUCTIONS
+## Instructions
 
 1. To run service along with the DB just run from main folder:
 
@@ -14,7 +14,7 @@ docker-compose up -d
 2. Now you can play with it and you should find it under http://localhost:8080/.
 3. To get to know the service endpoints please go to http//localhost:8080/swagger/.
 
-## RUNNING INTEGRATION TESTS
+## Running Integration Tests
 
 For purpose of this task I prepared a special docker-compose file to run integration tests independently of a IDE or OS.
 
