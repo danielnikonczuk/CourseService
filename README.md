@@ -17,7 +17,10 @@ docker-compose up -d
 ## RUNNING INTEGRATION TESTS
 
 For purpose of this task I prepared a special docker-compose file to run integration tests independently of a IDE or OS.
-It spins up two containers for the service (web and db), and the third one that imports the tests and run them using .NET SDK.
+
+It spins up two containers for the service (web and db), and the third one that imports the tests and run them using .NET SDK against the web container. Integration tests share DB context as if they would use this service in parallel with other users. However all tests are written to be logically independent so they could resemble real scenarios as close as they can. At the beginning and end of test runs we clear up all DB tables. 
+
+I resigned from unit tests for the sake of integrations tests. They have full functionality coverage and in my opinion it would be cumbersome to write unit tests to cover same code again just with mock-ups.
 
 1. To run integration tests container just run from the mail folder:
 ```
