@@ -1,9 +1,15 @@
 # Course Service
 
-## Instructions
+## Short description
+
+It is a WebAPI service developed in .NET Core 3.1 cross-platform framework with language of choice - C#. For DB connectivity I used Entity Framework ORM with Code-first approach to automatically create/recreate table schemas based on entities in the code. When service is spun up and DB doesn't exist, it will create it and seed it with initial data (ref. OnModelCreating method in [this file](https://github.com/danielnikonczuk/CourseService/blob/master/CourseService/Models/CourseServiceDbContext.cs). It is also very useful when entity changes. One can change entity in the code, and Entity Framework handles data migrations by preparing proper SQL migration scripts.
+
+The rest is pretty standard code for API service built in .NET Core with latest revisioned approaches to API development.
+It doesn't have everything you could have in your microservice e.g. authentication, authorization or versioning but I believe it's enough for the purpose of this task.
+
+## How to run it
 
 1. To run service along with the DB just run from main folder:
-
 ```
 docker-compose build 
 ```
