@@ -7,7 +7,7 @@ services:
     environment: 
       - API_URL=http://web:80
       - CONNECTION_STRING=Server=db;Database=CourseService;User Id=sa;Password=MyStrongPassw0rd!;   
-    entrypoint: bash /app/wait_for_it.sh web:80 -t 0 -- dotnet test
+    entrypoint: bash /app/wait_for_it.sh web:80 -t 0 -- dotnet test --filter Category=Integration
     depends_on: 
       - web
       - db
