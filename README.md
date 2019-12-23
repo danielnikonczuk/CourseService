@@ -1,4 +1,4 @@
-# Software Engineering Task - NORTHPASS
+# Course Service
 
 ## INSTRUCTIONS
 
