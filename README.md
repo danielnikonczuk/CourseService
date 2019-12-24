@@ -28,14 +28,13 @@ It spins up two containers for the service (web and db), and the third one that 
 
 I resigned from unit tests for the sake of integrations tests. They have full functionality coverage and in my opinion it would be cumbersome to write unit tests to cover same code again just with mock-ups.
 
-1. To run integration tests container just run from the mail folder:
+1. To run integration tests container just run from the main folder:
 ```
 docker-compose -f docker-compose-integration.yml up --build --abort-on-container-exit
 ```
-2. Watch the output logs. Expected result is: 
+2. Watch the output logs. Expected result should contain: 
 ```
 integration_1  | Test Run Successful.
 integration_1  | Total tests: 14
 integration_1  |      Passed: 14
-integration_1  |  Total time: 6.8945 Seconds
 ```
